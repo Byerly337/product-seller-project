@@ -20,28 +20,21 @@ public class SellerService {
         return sellerList;
     }
 
-    public void addSeller(Seller s) throws SellerException {
+    public Seller addSeller(Seller s) throws SellerException {
         Main.log.info("log, added seller");
         if (s.getName() == null || s.getName().isEmpty()) {
            throw new SellerException("Seller Name is required.");
        }
-        for(Seller i : sellerList){
+       for(Seller i : sellerList){
             if(s.equals(i)){
-                throw new SellerException("Seller Exists");
-            }else {
-                sellerList.add(s);
-            }
+            throw new SellerException("Seller Exists");
         }
 
-
-
-
-
-
-
-
-
+    }
+        sellerList.add(s);
+        return s;
+}
 
     }
-}
+
 
