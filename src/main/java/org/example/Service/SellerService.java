@@ -25,16 +25,21 @@ public class SellerService {
         if (s.getName() == null || s.getName().isEmpty()) {
            throw new SellerException("Seller Name is required.");
        }
-        for (int i = 0; i < sellerList.size(); i++) {
-            for (int j = i; j < sellerList.size(); i++) {
-                if (i != j) {
-                    throw new SellerException("Seller Exists");
-
-                }else {sellerList.add(s);
-
-                }
+        for(Seller i : sellerList){
+            if(s.equals(i)){
+                throw new SellerException("Seller Exists");
+            }else {
+                sellerList.add(s);
             }
         }
+
+
+
+
+
+
+
+
 
 
     }
