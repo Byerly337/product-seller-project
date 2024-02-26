@@ -1,0 +1,115 @@
+2024-02-25 20:12:55 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Parameter "#1" is not set; SQL statement:
+
+INSERT INTO SELLER (seller_id, name)
+VALUES (?, [90012-214]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:646)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:477)
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.message.DbException.get(DbException.java:199)
+	at org.h2.expression.Parameter.checkSet(Parameter.java:75)
+	at org.h2.command.Prepared.checkParameters(Prepared.java:207)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:159)
+	at org.h2.command.Command.executeUpdate(Command.java:252)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:252)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:223)
+	at org.h2.tools.RunScript.execute(RunScript.java:169)
+	at Util.ConnectionSingleton.resetTestDatabase(ConnectionSingleton.java:55)
+	at Util.ConnectionSingleton.getConnection(ConnectionSingleton.java:35)
+	at org.example.Main.main(Main.java:24)
+2024-02-25 20:13:33 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Cannot drop "SELLER" because "CONSTRAINT_18" depends on it; SQL statement:
+DROP TABLE SELLER IF EXISTS [90107-214]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:632)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:477)
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.command.ddl.DropTable.prepareDrop(DropTable.java:97)
+	at org.h2.command.ddl.DropTable.update(DropTable.java:121)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:169)
+	at org.h2.command.Command.executeUpdate(Command.java:252)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:252)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:223)
+	at org.h2.tools.RunScript.execute(RunScript.java:169)
+	at Util.ConnectionSingleton.resetTestDatabase(ConnectionSingleton.java:55)
+	at Util.ConnectionSingleton.getConnection(ConnectionSingleton.java:35)
+	at org.example.Main.main(Main.java:24)
+2024-02-26 08:27:52 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Cannot drop "SELLER" because "CONSTRAINT_18" depends on it; SQL statement:
+DROP TABLE SELLER IF EXISTS [90107-214]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:632)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:477)
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.command.ddl.DropTable.prepareDrop(DropTable.java:97)
+	at org.h2.command.ddl.DropTable.update(DropTable.java:121)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:169)
+	at org.h2.command.Command.executeUpdate(Command.java:252)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:252)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:223)
+	at org.h2.tools.RunScript.execute(RunScript.java:169)
+	at Util.ConnectionSingleton.resetTestDatabase(ConnectionSingleton.java:55)
+	at Util.ConnectionSingleton.getConnection(ConnectionSingleton.java:35)
+	at org.example.Main.main(Main.java:24)
+2024-02-26 09:03:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Cannot drop "SELLER" because "CONSTRAINT_18" depends on it; SQL statement:
+DROP TABLE SELLER IF EXISTS [90107-214]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:632)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:477)
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.command.ddl.DropTable.prepareDrop(DropTable.java:97)
+	at org.h2.command.ddl.DropTable.update(DropTable.java:121)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:169)
+	at org.h2.command.Command.executeUpdate(Command.java:252)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:252)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:223)
+	at org.h2.tools.RunScript.execute(RunScript.java:169)
+	at Util.ConnectionSingleton.resetTestDatabase(ConnectionSingleton.java:55)
+	at Util.ConnectionSingleton.getConnection(ConnectionSingleton.java:35)
+	at org.example.Main.main(Main.java:24)
+2024-02-26 09:04:14 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Cannot drop "SELLER" because "CONSTRAINT_18" depends on it; SQL statement:
+DROP TABLE SELLER IF EXISTS [90107-214]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:632)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:477)
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.command.ddl.DropTable.prepareDrop(DropTable.java:97)
+	at org.h2.command.ddl.DropTable.update(DropTable.java:121)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:169)
+	at org.h2.command.Command.executeUpdate(Command.java:252)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:252)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:223)
+	at org.h2.tools.RunScript.execute(RunScript.java:169)
+	at Util.ConnectionSingleton.resetTestDatabase(ConnectionSingleton.java:55)
+	at Util.ConnectionSingleton.getConnection(ConnectionSingleton.java:35)
+	at org.example.Main.main(Main.java:24)
+2024-02-26 09:42:32 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Cannot drop "SELLER" because "CONSTRAINT_18" depends on it; SQL statement:
+DROP TABLE SELLER IF EXISTS [90107-214]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:632)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:477)
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.command.ddl.DropTable.prepareDrop(DropTable.java:97)
+	at org.h2.command.ddl.DropTable.update(DropTable.java:121)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:169)
+	at org.h2.command.Command.executeUpdate(Command.java:252)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:252)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:223)
+	at org.h2.tools.RunScript.execute(RunScript.java:169)
+	at Util.ConnectionSingleton.resetTestDatabase(ConnectionSingleton.java:55)
+	at Util.ConnectionSingleton.getConnection(ConnectionSingleton.java:35)
+	at org.example.Main.main(Main.java:24)
+2024-02-26 09:53:29 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Cannot drop "SELLER" because "CONSTRAINT_18" depends on it; SQL statement:
+DROP TABLE SELLER IF EXISTS [90107-214]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:632)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:477)
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.command.ddl.DropTable.prepareDrop(DropTable.java:97)
+	at org.h2.command.ddl.DropTable.update(DropTable.java:121)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:169)
+	at org.h2.command.Command.executeUpdate(Command.java:252)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:252)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:223)
+	at org.h2.tools.RunScript.execute(RunScript.java:169)
+	at Util.ConnectionSingleton.resetTestDatabase(ConnectionSingleton.java:55)
+	at Util.ConnectionSingleton.getConnection(ConnectionSingleton.java:35)
+	at org.example.Main.main(Main.java:24)

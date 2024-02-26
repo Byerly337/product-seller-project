@@ -7,11 +7,7 @@ public class SellerTest {
 
     SellerService sellerService;
 
-    @Before
-    public void setUp(){
-        sellerService = new SellerService();
 
-    }
 
 
 

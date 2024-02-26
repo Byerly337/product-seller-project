@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import io.javalin.Javalin;
 import org.example.Exception.ProductException;
 import org.example.Exception.SellerException;
+import org.example.Exception.SellerNotFoundException;
 import org.example.Model.Product;
 import org.example.Model.Seller;
 import org.example.Service.ProductService;
@@ -28,7 +29,7 @@ public class ProductController {
         api.get("health", context -> {context.result("Server is UP!");} );
 
         api.get("seller", context -> {
-            List<Seller> sellerList = sellerService.getSellerList();
+            List<Seller> sellerList = sellerService.getAllSellers();
             context.json(sellerList);
         });
         api.get("product", context -> {
@@ -39,14 +40,25 @@ public class ProductController {
             try{
                 ObjectMapper om = new ObjectMapper();
                 Seller s = om.readValue(context.body(), Seller.class);
-                sellerService.addSeller(s);
+                sellerService.saveSeller(s);
                 context.status(201);
+ //               context.json(saveSeller);
             }catch(JsonProcessingException e){
                 context.status(400);
-            }catch(SellerException e){
-            context.result(e.getMessage());
-            context.status(400);
+//            }catch(SellerException e){
+//            context.result(e.getMessage());
+//            context.status(400);
         }
+        });
+
+        api.get("seller/{id}", context -> {
+            int id = Integer.parseInt(context.pathParam("id"));
+            try{
+                Seller s = sellerService.getSellerById(id);
+                context.json(s);
+            }catch (SellerNotFoundException e){
+                context.status(404);
+            }
         });
 
         api.post("product", context -> {
