@@ -76,13 +76,15 @@ public class ProductDAO {
 
     public void updateProduct(Product updatedProduct) {
         try {
-            PreparedStatement ps = conn.prepareStatement(" Update PRODUCT Set productName = ?, sellerName = ?, productPrice = ?" +
-                    "WHERE productID = ?");
+            PreparedStatement ps = conn
+                    .prepareStatement(" Update PRODUCT Set productName = ?, sellerName = ?, productPrice = ?" +
+                            "WHERE productID = ?");
             ps.setString(1, updatedProduct.getProductName());
             ps.setInt(2, updatedProduct.getSellerId());
             ps.setDouble(3, updatedProduct.getPrice());
             ps.setInt(4, updatedProduct.getProductId());
-            System.out.println(updatedProduct.getProductName() + " " + updatedProduct.getSellerId() + " " + updatedProduct.getPrice()
+            System.out.println(updatedProduct.getProductName() + " " + updatedProduct.getSellerId() + " "
+                    + updatedProduct.getPrice()
                     + " " + updatedProduct.getProductId());
             ps.executeUpdate();
         } catch (SQLException e) {

@@ -1,6 +1,6 @@
 package org.example.Model;
 
-import java.util.Objects;
+import dtos.requests.ProductRequest;
 
 public class Product {
 
@@ -10,6 +10,12 @@ public class Product {
     private int sellerId;
 
     public Product() {
+    }
+
+    public Product(ProductRequest productRequest, int sellerId) {
+        this.productName = productRequest.getProductName();
+        this.price = productRequest.getPrice();
+        this.sellerId = sellerId;
     }
 
     public Product(int productId, String productName, double price, int sellerId) {
