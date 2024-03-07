@@ -4,30 +4,28 @@ import java.util.Objects;
 
 public class Product {
 
-    public long productId;
-    public String productName;
-    public double price;
-    public String sellerName;
+    private int productId;
+    private String productName;
+    private double price;
+    private int sellerId;
 
-    public Product(){
-
+    public Product() {
     }
 
-    public Product(long productId, String productName, double price, String sellerName) {
+    public Product(int productId, String productName, double price, int sellerId) {
         this.productId = productId;
         this.productName = productName;
         this.price = price;
-        this.sellerName = sellerName;
+        this.sellerId = sellerId;
     }
 
-    public long getProductId() {
+    public int getProductId() {
         return productId;
     }
 
-    public void setProductId(long productId) {
+    public void setProductId(int productId) {
         this.productId = productId;
     }
-
 
     public String getProductName() {
         return productName;
@@ -45,34 +43,11 @@ public class Product {
         this.price = price;
     }
 
-    public String getSellerName() {
-        return sellerName;
+    public int getSellerId() {
+        return sellerId;
     }
 
-    public void setSellerName(String sellerName) {
-        this.sellerName = sellerName;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Product product = (Product) o;
-        return Double.compare(price, product.price) == 0 && Objects.equals(productId, product.productId) && Objects.equals(productName, product.productName) && Objects.equals(sellerName, product.sellerName);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(productId, productName, price, sellerName);
-    }
-
-    @Override
-    public String toString() {
-        return "Product{" +
-                "productId='" + productId + '\'' +
-                ", productName='" + productName + '\'' +
-                ", price=" + price +
-                ", sellerName='" + sellerName + '\'' +
-                '}';
+    public void setSellerId(int sellerId) {
+        this.sellerId = sellerId;
     }
 }

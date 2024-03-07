@@ -7,63 +7,98 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import org.example.Model.Product;
+import org.example.Service.ProductService;
+import org.example.Service.SellerService;
 
 public class ProductDAO {
 
     Connection conn;
-    public ProductDAO(Connection conn){
+
+    ProductService productService;
+    SellerService sellerService;
+
+    public ProductDAO(Connection conn, ProductService productService) {
         this.conn = conn;
+        this.productService = productService;
     }
-    public void insertProduct(Product p){
-        try{
+
+    public void insertProduct(Product p) {
+        try {
             PreparedStatement ps = conn.prepareStatement("insert into PRODUCT" +
-                    " (productId, productName, price, sellerName) " +
-                    "values (?, ?, ?, ?)");
-            ps.setLong(1, p.getProductId());
-            ps.setString(2, p.getProductName());
-            ps.setDouble(3, p.getPrice());
-            ps.setString(4, p.getSellerName());
+                    " (product_name, price, seller_id) " +
+                    "values (?, ?, ?)");
+            ps.setString(1, p.getProductName());
+            ps.setDouble(2, p.getPrice());
+            ps.setInt(3, p.getSellerId());
             ps.executeUpdate();
-        }catch(SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
-    public List<Product> getAllProducts(){
+
+    public List<Product> getAllProducts() {
         List<Product> resultProducts = new ArrayList<>();
-        try{
-            PreparedStatement ps = conn.prepareStatement("select * from product");
+        try {
+            PreparedStatement ps = conn.prepareStatement("select * from PRODUCT");
             ResultSet rs = ps.executeQuery();
-            while(rs.next()){
-                long productId = rs.getLong("productID");
-                String productName = rs.getString("ProductName");
+            while (rs.next()) {
+                int productId = rs.getInt("product_id");
+                String productName = rs.getString("Product_name");
                 double price = rs.getDouble("price");
-                String sellerName = rs.getString("sellerName");
-                Product p = new Product(productId, productName, price, sellerName);
+                int sellerId = rs.getInt("seller_id");
+                Product p = new Product(productId, productName, price, sellerId);
                 resultProducts.add(p);
             }
-        }catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return resultProducts;
     }
-    public Product getProductById(int id){
-        try{
+
+    public Product getProductById(int id) {
+        try {
             PreparedStatement ps = conn.prepareStatement("select * from Product where productId = ?");
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
-            if(rs.next()){
-                long productId = rs.getLong("productID");
-                String productName  = rs.getString("productName");
+            if (rs.next()) {
+                int productId = rs.getInt("product_id");
+                String productName = rs.getString("product_name");
                 double price = rs.getDouble("price");
-                String sellerName = rs.getString("sellerName");
-                Product p = new Product(productId, productName, price, sellerName);
+                int sellerId = rs.getInt("seller_id");
+                Product p = new Product(productId, productName, price, sellerId);
                 return p;
             }
-        }catch(SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return null;
     }
 
+    public void updateProduct(Product updatedProduct) {
+        try {
+            PreparedStatement ps = conn.prepareStatement(" Update PRODUCT Set productName = ?, sellerName = ?, productPrice = ?" +
+                    "WHERE productID = ?");
+            ps.setString(1, updatedProduct.getProductName());
+            ps.setInt(2, updatedProduct.getSellerId());
+            ps.setDouble(3, updatedProduct.getPrice());
+            ps.setInt(4, updatedProduct.getProductId());
+            System.out.println(updatedProduct.getProductName() + " " + updatedProduct.getSellerId() + " " + updatedProduct.getPrice()
+                    + " " + updatedProduct.getProductId());
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
+    public void deleteProductByID(Product currentProduct) {
+        try {
+            PreparedStatement ps = conn.prepareStatement("delete from PRODUCT where product_id = ?");
+            ps.setInt(1, currentProduct.getProductId());
+            ps.executeUpdate();
+            ps.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

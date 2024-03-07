@@ -17,13 +17,17 @@ public class SellerService {
         this.sellerDAO = sellerDAO;
     }
 
+    //List<Seller> sellerList;
+
+
     public List<Seller> getAllSellers() {
+        System.out.println("can i get sellers?");
         List<Seller> sellerList = sellerDAO.getAllSellers();
         return sellerList;
     }
 
     public void saveSeller(Seller s) {
-        sellerDAO.insertSeller(s);
+        sellerDAO.addSeller(s);
     }
 
     public Seller getSellerById(int id) throws SellerNotFoundException {
@@ -36,42 +40,31 @@ public class SellerService {
     }
 
 
-    List<Seller> sellerList;
+    public void addSeller(Seller s) throws SellerException {
+        Main.log.info("log, added seller");
+        List<Seller> sellerList = sellerDAO.getAllSellers();
+        if (s.getName() == null || s.getName().isEmpty()) {
+            throw new SellerException("Seller Name is required.");
+        }
+        for (Seller i : sellerList) {
+            if (s.equals(i)) {
+                throw new SellerException("Seller Exists");
+            }
 
-    public SellerService() {
-        this.sellerList = new ArrayList<>();
+        }
+ //       sellerList.add(s);
+        sellerDAO.addSeller(s);
     }
 
-//    public List<Seller> getSellerList() {
-//        return sellerList;
-//    }
-
-//    public Seller addSeller(Seller s) throws SellerException {
-//        Main.log.info("log, added seller");
-//        if (s.getName() == null || s.getName().isEmpty()) {
-//            throw new SellerException("Seller Name is required.");
-//        }
-//        for (Seller i : sellerList) {
-//            if (s.equals(i)) {
-//                throw new SellerException("Seller Exists");
-//            }
-
-//        }
-//        int id = (int) (Math.random() * Integer.MAX_VALUE);
-//        s.setSellerID(sellerId);
-//        sellerList.add(s);
-//        return s;
-//    }
-
-    //   public boolean sellerExists (String name){
-
-    //           for (Seller seller : sellerList) {
-//               if (seller.getName().equals(name)) {
-//                   return true;
-    //               }
-    //           }
-    //           return false;
-    //       }
+       public boolean sellerExists (String name){
+           List<Seller> sellerList = sellerDAO.getAllSellers();
+               for (Seller seller : sellerList) {
+               if (seller.getName().equals(name)) {
+                   return true;
+                 }
+              }
+               return false;
+           }
 
 
 }

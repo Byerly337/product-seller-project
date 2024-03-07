@@ -19,19 +19,18 @@ public class Main {
 
     public static Logger log = LoggerFactory.getLogger(Main.class);
 
-
     public static void main(String[] args) {
         Connection conn = ConnectionSingleton.getConnection();
         SellerDAO sellerDAO = new SellerDAO(conn);
-        ProductDAO productDAO = new ProductDAO(conn);
-        SellerService sellerService = new SellerService(sellerDAO);
-        ProductService productService = new ProductService(productDAO);
+        ProductService productService = null;
+        ProductDAO productDAO = new ProductDAO(conn, productService);
+        //       ProductService productService = new ProductService(productDAO);
 //        ModuleLayer.Controller controller = new ModuleLayer.Controller(sellerService, productService);
 //        ProductController productController = new ProductController(sellerService,productService);
-        sellerService = new SellerService();
-        productService = new ProductService(sellerService);
+        SellerService sellerService = new SellerService(sellerDAO);
+        productService = new ProductService(productDAO, sellerService);
         ProductController productController = new ProductController(sellerService, productService);
         Javalin api = productController.getAPI();
         api.start(9002);
-        }
+    }
     }
