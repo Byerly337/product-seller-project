@@ -23,7 +23,7 @@ public class SellerDAO {
             while(resultSet.next()){
                 int sellerId = resultSet.getInt("seller_id");
                 String sellerName = resultSet.getString("name");
-                Seller s = new Seller(sellerName);
+                Seller s = new Seller(sellerId, sellerName);
                 sellerResults.add(s);
             }
         }catch(SQLException e){

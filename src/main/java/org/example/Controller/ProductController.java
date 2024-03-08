@@ -2,6 +2,7 @@ package org.example.Controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import dtos.requests.ProductRequest;
 import dtos.requests.SellerRequest;
 import io.javalin.Javalin;
 import org.example.Exception.ProductException;
@@ -69,21 +70,37 @@ public class ProductController {
 
         api.post("product", context -> {
             try{
+                // Get the incoming client payload (aka postman request)
+                // Map it to the product request dto (data transfer object)
                 ObjectMapper om = new ObjectMapper();
-                Product p = om.readValue(context.body(), Product.class);
-                Product newProduct = productService.addProduct(p);
+                ProductRequest productRequest = om.readValue(context.body(), ProductRequest.class);
+
+                // Get the seller id from the seller service by passing in the dto sellerName
+                Seller existingSeller = sellerService.getSellerByName(productRequest.getSellerName());
+                // Throw an exception if the seller does not exist
+                if (existingSeller == null) {
+                    throw new ProductException("The seller must be added on seller service first.");
+                }
+
+                // Convert the product dto to the product model
+                Product newProduct = new Product(productRequest, existingSeller.getSellerId());
+
+                // Save the product obj to the database using the product service
+                Product savedProduct = productService.addProduct(newProduct);
+
+                // Set the success status code and return the saved product
                 context.status(201);
-                context.json(newProduct);
-            }catch(JsonProcessingException e){
+        //        context.json(savedProduct);
+            } catch (JsonProcessingException e) {
                 context.status(400);
-            }catch(ProductException e){
+            } catch (ProductException e) {
                 context.result(e.getMessage());
                 context.status(400);
             }
         });
 
         api.get("product/{productId}", context -> {
-            long productId = Long.parseLong(context.pathParam("productId"));
+            int productId = Integer.parseInt(context.pathParam("productId"));
             Product p = productService.getProductById(productId);
             if(p == null){
                 context.status(404);
@@ -94,17 +111,20 @@ public class ProductController {
         });
 
         api.delete("product/{productId}", context -> {
-            long productId = Long.parseLong(context.pathParam("productId"));
-            Product p = productService.removeProductID(productId);
+            int productId = Integer.parseInt(context.pathParam("productId"));
+            productService.removeProductID(productId);
                  context.status(200);
         });
 
-        api.put("updateproduct/{productId}" , context -> {
-            long productId = Long.parseLong(context.pathParam("productId"));
-            Product p = productService.removeProductID(productId);
+        api.put("product/{productId}" , context -> {
+            int productId = Integer.parseInt(context.pathParam("productId"));
+
             ObjectMapper om = new ObjectMapper();
-            Product p2 = om.readValue(context.body(), Product.class);
-            Product newProduct = productService.addProduct(p2);
+            Product updatedProduct = om.readValue(context.body(), Product.class);
+            productService.updateProduct(productId, updatedProduct);
+            context.status(200);
+            context.result("Product was updated");
+
 
         });
 

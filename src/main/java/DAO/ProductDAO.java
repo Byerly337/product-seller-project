@@ -57,7 +57,7 @@ public class ProductDAO {
 
     public Product getProductById(int id) {
         try {
-            PreparedStatement ps = conn.prepareStatement("select * from Product where productId = ?");
+            PreparedStatement ps = conn.prepareStatement("select * from PRODUCT where product_id = ?");
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
@@ -76,12 +76,11 @@ public class ProductDAO {
 
     public void updateProduct(Product updatedProduct) {
         try {
-            PreparedStatement ps = conn.prepareStatement(" Update PRODUCT Set productName = ?, sellerName = ?, productPrice = ?" +
-                    "WHERE productID = ?");
+            PreparedStatement ps = conn.prepareStatement(" Update PRODUCT Set product_name = ?, price = ?" +
+                    " WHERE product_id = ?");
             ps.setString(1, updatedProduct.getProductName());
-            ps.setInt(2, updatedProduct.getSellerId());
-            ps.setDouble(3, updatedProduct.getPrice());
-            ps.setInt(4, updatedProduct.getProductId());
+            ps.setDouble(2, updatedProduct.getPrice());
+            ps.setInt(3,updatedProduct.getProductId());
             System.out.println(updatedProduct.getProductName() + " " + updatedProduct.getSellerId() + " " + updatedProduct.getPrice()
                     + " " + updatedProduct.getProductId());
             ps.executeUpdate();
@@ -91,6 +90,7 @@ public class ProductDAO {
     }
 
     public void deleteProductByID(Product currentProduct) {
+        System.out.println("will product delete");
         try {
             PreparedStatement ps = conn.prepareStatement("delete from PRODUCT where product_id = ?");
             ps.setInt(1, currentProduct.getProductId());

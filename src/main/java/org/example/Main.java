@@ -24,9 +24,6 @@ public class Main {
         SellerDAO sellerDAO = new SellerDAO(conn);
         ProductService productService = null;
         ProductDAO productDAO = new ProductDAO(conn, productService);
-        //       ProductService productService = new ProductService(productDAO);
-//        ModuleLayer.Controller controller = new ModuleLayer.Controller(sellerService, productService);
-//        ProductController productController = new ProductController(sellerService,productService);
         SellerService sellerService = new SellerService(sellerDAO);
         productService = new ProductService(productDAO, sellerService);
         ProductController productController = new ProductController(sellerService, productService);

@@ -7,7 +7,7 @@ public class SellerTest {
 
     SellerService sellerService;
 
-
+//See ProductTest for all test methods on product and service service classes.
 
 
 
